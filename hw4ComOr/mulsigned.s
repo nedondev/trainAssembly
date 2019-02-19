@@ -19,6 +19,10 @@ _start:
 	@use mul unsinged code
 	mov r0, #0x0
 	bl _mul
+	mov r1, r0
+	cmp r1,#0x7F
+	blhi _multiplicand_2complement
+	mov r0, r1
 	and r0,r0,#0x7F
 	orr r0,r0,r4
 _exit:
@@ -30,7 +34,7 @@ _multiplicand_2complement:
 	bx lr
 _multiplier_2complement:
 	mvn r2,r2
-	add r2,r2,#2
+	add r2,r2,#1
 	bx lr
 _mul:
 	sub sp,sp,#4

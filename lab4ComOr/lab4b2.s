@@ -83,8 +83,40 @@ _start:
 	
 	ldr r1,=same_string
 	ldrb r0,[r1]
+        cmp r0,#0
+        bleq _set_String_No
+        blne _set_String_Yes
+        bl _write
 
-	b _exit
+        b _exit
+
+_set_String_No:
+        ldr r1,=string
+        mov r0,#0x4e @N
+        strb r0,[r1,#0]
+        mov r0,#0x6f @o
+        strb r0,[r1,#1]
+        mov r0,#0xa @New line
+        strb r0,[r1,#2]
+        ldr r1,=write_size
+        mov r0,#0x3
+        str r0,[r1]
+
+
+_set_String_Yes:
+        ldr r1,=string
+        mov r0,#0x59 @Y
+        strb r0,[r1,#0]
+        mov r0,#0x65 @e
+        strb r0,[r1,#1]
+        mov r0,#0x73 @s
+        strb r0,[r1,#2]
+        mov r0,#0xa @New line
+        strb r0,[r1,#3]
+        ldr r1,=write_size
+        mov r0,#0x4
+        str r0,[r1]
+
 @check first letter that string1 and string2 match
 _check_initial:
 	sub sp,sp,#8

@@ -101,6 +101,7 @@ _set_String_No:
         ldr r1,=write_size
         mov r0,#0x3
         str r0,[r1]
+	bx lr
 
 
 _set_String_Yes:
@@ -116,6 +117,7 @@ _set_String_Yes:
         ldr r1,=write_size
         mov r0,#0x4
         str r0,[r1]
+	bx lr
 
 @check first letter that string1 and string2 match
 _check_initial:
